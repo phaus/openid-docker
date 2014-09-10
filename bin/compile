@@ -1,0 +1,26 @@
+#!/bin/sh
+
+BUILDPACK_DIR=$(cd $(dirname $0)/.. ; pwd)
+BUILD_DIR=$1
+
+echo "-----> Assembling Tomcat App."
+echo "       Working dir   = $(pwd)"
+echo "       Build dir     = $BUILD_DIR"
+echo "       Cache dir     = $2"
+echo "       Buildpack dir = $BUILDPACK_DIR"
+
+# The web app is located in $BUILD_DIR. We need to move it into a ROOT sub dir.
+# We build a list of all files before we put other stuff in this dir.
+
+cd $BUILD_DIR
+
+FILES=$(ls)
+
+cp -R $BUILDPACK_DIR/tomcat .
+cp $BUILDPACK_DIR/Procfile Procfile
+
+rm -rf tomcat/webapps
+
+mkdir -p tomcat/webapps/ROOT
+
+mv $FILES tomcat/webapps/ROOT

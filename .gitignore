@@ -1,7 +1,6 @@
 local-values.conf
 target
 *~
-bin
 *.idea
 *.iml
 *.eml

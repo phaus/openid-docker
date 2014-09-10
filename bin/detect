@@ -1,0 +1,8 @@
+#!/bin/sh
+
+if [ -e "$1/WEB-INF/web.xml" ] ; then
+	echo "Java Web App"
+	exit 0
+else
+	exit 1
+fi
